@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planszówkowo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Planszówkowo</h1>
+    <div class="header-buttons">
+      <button class="btn-add">Dodaj grę</button>
+      <button class="btn-cart">Koszyk</button>
+      <button class="btn-login">Zaloguj się</button>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="filters">
+      <h2>Wyszukiwanie i filtry</h2>
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label>Szukaj w opisie</label>
+          <input type="text" placeholder="np. strategia...">
+        </div>
+        <div class="filter-group">
+          <label>Cena od (zł)</label>
+          <input type="number" placeholder="0" min="0">
+        </div>
+        <div class="filter-group">
+          <label>Cena do (zł)</label>
+          <input type="number" placeholder="500" min="0">
+        </div>
+        <div class="filter-group">
+          <label>Rodzaj</label>
+          <select>
+            <option value="">Wszystkie</option>
+            <option>Strategiczna</option>
+            <option>Rodzinna</option>
+            <option>Imprezowa</option>
+            <option>Kooperacyjna</option>
+            <option>Ekonomiczna</option>
+            <option>Karciana</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Ilość graczy</label>
+          <select>
+            <option value="">Dowolna</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3-4</option>
+            <option>5-6</option>
+            <option>7+</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Wydawnictwo</label>
+          <select>
+            <option value="">Wszystkie</option>
+            <option>Hans im Glück</option>
+            <option>Rio Grande Games</option>
+            <option>Hasbro</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Czas gry</label>
+          <select>
+            <option value="">Dowolny</option>
+            <option>do 30 min</option>
+            <option>do 60 min</option>
+            <option>do 120 min</option>
+            <option>ponad 120 min</option>
+          </select>
+        </div>
+        <button>Szukaj</button>
+      </div>
+    </section>
+
+    <section class="games-list">
+      <h2>Wyniki (3)</h2>
+      <div class="games-grid">
+
+        <div class="game-card">
+          <h3><a href="index2.html">Carcassonne</a></h3>
+          <div class="info">Strategiczna · 2-5 graczy · 45 min · Hans im Glück</div>
+          <div class="desc">Układaj kafelki i stawiaj swoich poddanych na polach, drogach, miastach i klasztorach w
+            średniowiecznej Francji.</div>
+          <div class="bottom">
+            <span class="price">109 zł</span>
+            <button class="btn-cart-small">Do koszyka</button>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <h3><a href="index2.html">El Grande</a></h3>
+          <div class="info">Strategiczna · 2-5 graczy · 90 min · Rio Grande Games</div>
+          <div class="desc">Klasyka gier terytorialnych. Rozmieszczaj swoich rycerzy w regionach XV-wiecznej Hiszpanii i
+            zdobywaj wpływy.</div>
+          <div class="bottom">
+            <span class="price">179 zł</span>
+            <button class="btn-cart-small">Do koszyka</button>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <h3><a href="index2.html">Monopoly</a></h3>
+          <div class="info">Rodzinna · 2-6 graczy · 120 min · Hasbro</div>
+          <div class="desc">Najbardziej znana gra planszowa na świecie. Kupuj nieruchomości, buduj domy i hotele,
+            zbankrutuj rywali.</div>
+          <div class="bottom">
+            <span class="price">89 zł</span>
+            <button class="btn-cart-small">Do koszyka</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</body>
+
+</html>

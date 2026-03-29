@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carcassonne — Planszówkowo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>Planszówkowo</h1>
+    <div class="header-buttons">
+      <button class="btn-cart">Koszyk (0)</button>
+      <button class="btn-login">Zaloguj się</button>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="breadcrumb">
+      <a href="index.html">Powrót do listy gier</a>
+    </div>
+
+    <div class="product-detail">
+      <h2>Carcassonne</h2>
+      <div class="meta">
+        <span>Strategiczna</span>
+        <span>2-5 graczy</span>
+        <span>45 min</span>
+        <span>Hans im Glück</span>
+      </div>
+      <div class="description">
+        <p>Układaj kafelki i stawiaj swoich poddanych na polach, drogach, miastach i klasztorach w średniowiecznej
+          Francji. Każdy kafelek musi pasować do sąsiednich, tworząc mapę pełną zamków, dróg i łąk.</p>
+        <br>
+        <p>Gra zdobyła nagrodę Spiel des Jahres w 2001 roku i do dziś jest jedną z najpopularniejszych gier planszowych
+          na świecie.</p>
+        <br>
+        <p><strong>W zestawie:</strong> 72 kafelki terenu, 40 poddanych w 5 kolorach, plansza punktacji, instrukcja.</p>
+      </div>
+      <div class="price-big">109 zł</div>
+      <div class="actions">
+        <button class="btn-cart">Dodaj do koszyka</button>
+        <button class="btn-add" onclick="document.getElementById('edit-section').style.display='block'">Edytuj</button>
+      </div>
+    </div>
+
+    <div class="edit-form" id="edit-section" style="display: none;">
+      <h2>Edytuj grę</h2>
+      <form onsubmit="event.preventDefault(); document.getElementById('edit-section').style.display='none';">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nazwa gry</label>
+            <input type="text" value="Carcassonne" required>
+          </div>
+          <div class="form-group">
+            <label>Rodzaj</label>
+            <select>
+              <option selected>Strategiczna</option>
+              <option>Rodzinna</option>
+              <option>Imprezowa</option>
+              <option>Kooperacyjna</option>
+              <option>Ekonomiczna</option>
+              <option>Karciana</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Cena (zł)</label>
+            <input type="number" value="109" min="1" required>
+          </div>
+          <div class="form-group">
+            <label>Min. graczy</label>
+            <input type="number" value="2" min="1" required>
+          </div>
+          <div class="form-group">
+            <label>Max. graczy</label>
+            <input type="number" value="5" min="1" required>
+          </div>
+          <div class="form-group">
+            <label>Czas gry (min)</label>
+            <input type="number" value="45" min="1" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Wydawnictwo</label>
+            <input type="text" value="Hans im Glück">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full">
+            <label>Opis</label>
+            <textarea>Układaj kafelki i stawiaj swoich poddanych na polach, drogach, miastach i klasztorach w średniowiecznej Francji.</textarea>
+          </div>
+        </div>
+        <div class="form-buttons">
+          <button type="submit" class="btn-save">Zapisz</button>
+          <button type="button" class="btn-cancel"
+            onclick="document.getElementById('edit-section').style.display='none'">Anuluj</button>
+        </div>
+      </form>
+    </div>
+
+  </main>
+
+
+
+</body>
+
+</html>
