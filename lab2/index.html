@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>To Do</h1>
+
+        <!-- wyszukiwarka -->
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="Szukaj zadania...">
+            <label>
+                <input type="checkbox" id="caseSensitive"> Case-sensitive
+            </label>
+        </div>
+
+        <!-- zarządzanie listami -->
+        <div class="manage-lists-section">
+            <input type="text" id="newListInput" placeholder="Nazwa nowej listy...">
+            <button id="addListBtn" class="btn btn-primary">Dodaj Listę</button>
+        </div>
+
+        <hr>
+
+        <!-- dodawanie zadań -->
+        <div class="add-task-section">
+            <input type="text" id="taskInput" placeholder="Nowe zadanie...">
+            <select id="listSelect">
+                <!-- dynamiczne listy -->
+            </select>
+            <button id="addTaskBtn" class="btn btn-primary">Dodaj Zadanie</button>
+        </div>
+
+        <!-- kontener list -->
+        <div id="listsContainer"></div>
+
+        <!-- powiadomienie undo -->
+        <p class="undo-info">Naciśnij Ctrl+Z, aby przywrócić ostatnio usunięte zadanie.</p>
+    </div>
+
+    <!-- modal potwierdzenia usunięcia -->
+    <div id="deleteModal" class="modal-overlay hidden">
+        <div class="modal">
+            <h2>Potwierdzenie</h2>
+            <p id="modalText"></p>
+            <div class="modal-actions">
+                <button id="confirmDeleteBtn" class="btn btn-danger">Usuń</button>
+                <button id="cancelDeleteBtn" class="btn">Anuluj</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
