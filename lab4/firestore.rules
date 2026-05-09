@@ -1,0 +1,59 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /games/{gameId} {
+      allow read: if true;
+
+      allow create: if request.auth != null
+        && request.resource.data.sellerId == request.auth.uid;
+
+      allow update: if isOwner()
+        || isBuyNow()
+        || isBid();
+
+      allow delete: if request.auth != null
+        && request.auth.uid == resource.data.sellerId;
+
+      function isOwner() {
+        return request.auth != null
+          && request.auth.uid == resource.data.sellerId;
+      }
+
+      function isBuyNow() {
+        return request.auth != null
+          && request.auth.uid != resource.data.sellerId
+          && resource.data.isAuction == false
+          && resource.data.isSold == false
+          && request.resource.data.diff(resource.data).changedKeys().hasOnly([
+            'isSold',
+            'buyerId',
+            'buyerName',
+            'soldAt',
+            'updatedAt'
+          ])
+          && request.resource.data.isSold == true
+          && request.resource.data.buyerId == request.auth.uid;
+      }
+
+      function isBid() {
+        return request.auth != null
+          && request.auth.uid != resource.data.sellerId
+          && resource.data.isAuction == true
+          && resource.data.isSold == false
+          && request.resource.data.diff(resource.data).changedKeys().hasOnly([
+            'currentBidPln',
+            'highestBidderId',
+            'highestBidderName',
+            'bidCount',
+            'updatedAt'
+          ])
+          && request.resource.data.currentBidPln is number
+          && resource.data.currentBidPln is number
+          && request.resource.data.currentBidPln > resource.data.currentBidPln
+          && request.resource.data.highestBidderId == request.auth.uid
+          && request.resource.data.bidCount == resource.data.bidCount + 1;
+      }
+    }
+  }
+}
