@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { AVAILABLE_GAME_TYPES } from "@/lib/filterBoardGames";
 import {
@@ -73,6 +73,7 @@ function mapFormValuesToGame(values: GameFormValues): BoardGameDraft {
 export function GameForm({ mode, gameId }: GameFormProps) {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
+  const descriptionRef = useRef<HTMLTextAreaElement | null>(null);
   const [game, setGame] = useState<BoardGame | null>(null);
   const [formValues, setFormValues] = useState<GameFormValues>(EMPTY_FORM_VALUES);
   const [loading, setLoading] = useState(mode === "edit");
@@ -193,6 +194,11 @@ export function GameForm({ mode, gameId }: GameFormProps) {
 
     if (validationError) {
       setSubmitError(validationError);
+
+       if (!formValues.descriptionText.trim()) {
+        descriptionRef.current?.focus();
+      }
+
       return;
     }
 
@@ -408,6 +414,7 @@ export function GameForm({ mode, gameId }: GameFormProps) {
               <label htmlFor="description">Opis (jeden akapit w linii)</label>
               <textarea
                 id="description"
+                ref={descriptionRef}
                 className="form-control"
                 rows={6}
                 value={formValues.descriptionText}

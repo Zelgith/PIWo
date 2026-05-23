@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
+import { useCart } from "@/components/CartProvider";
 import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import {
   buyNow,
@@ -23,6 +24,7 @@ type GameDetailsClientProps = {
 export function GameDetailsClient({ gameId }: GameDetailsClientProps) {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
+  const { isInCart, addToCart, removeFromCart } = useCart();
   const [game, setGame] = useState<BoardGame | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -169,6 +171,8 @@ export function GameDetailsClient({ gameId }: GameDetailsClientProps) {
   const isOwner = user?.uid === game.sellerId;
   const currentAuctionPrice = game.currentBidPln ?? game.price_pln;
   const minimumBid = currentAuctionPrice + 1;
+  const canUseCart = !game.isSold && !game.isAuction && !isOwner;
+  const inCart = isInCart(game.id);
 
   return (
     <>
@@ -284,18 +288,44 @@ export function GameDetailsClient({ gameId }: GameDetailsClientProps) {
               </Link>
             )
           ) : user ? (
-            <button
-              type="button"
-              className="button button--accent"
-              disabled={actionPending}
-              onClick={handleBuyNow}
-            >
-              {actionPending ? "Kupowanie..." : "Kup teraz"}
-            </button>
+            <>
+              <button
+                type="button"
+                className="button button--accent"
+                disabled={actionPending}
+                onClick={handleBuyNow}
+              >
+                {actionPending ? "Kupowanie..." : "Kup teraz"}
+              </button>
+              {canUseCart ? (
+                <button
+                  type="button"
+                  className="button button--secondary"
+                  onClick={() =>
+                    inCart ? removeFromCart(game.id) : addToCart(game.id)
+                  }
+                >
+                  {inCart ? "Usuń z koszyka" : "Do koszyka"}
+                </button>
+              ) : null}
+            </>
           ) : (
-            <Link href="/login" className="button button--secondary">
-              Zaloguj się, aby kupić
-            </Link>
+            <>
+              <Link href="/login" className="button button--secondary">
+                Zaloguj się, aby kupić
+              </Link>
+              {canUseCart ? (
+                <button
+                  type="button"
+                  className="button button--light"
+                  onClick={() =>
+                    inCart ? removeFromCart(game.id) : addToCart(game.id)
+                  }
+                >
+                  {inCart ? "Usuń z koszyka" : "Do koszyka"}
+                </button>
+              ) : null}
+            </>
           )}
         </div>
         {game.isAuction ? (

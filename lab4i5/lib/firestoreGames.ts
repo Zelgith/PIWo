@@ -203,6 +203,12 @@ export async function fetchGameById(id: string) {
   return mapGameDoc(gameSnapshot);
 }
 
+export async function fetchGamesByIds(ids: string[]) {
+  const games = await Promise.all(ids.map((id) => fetchGameById(id)));
+
+  return games.filter((game): game is BoardGame => game !== null);
+}
+
 export async function createGame(draft: BoardGameDraft, user: User) {
   const firestore = requireDb();
   const mappedDraft = mapDraftToFirestoreData(draft);

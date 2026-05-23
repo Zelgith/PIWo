@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AuthControls } from "@/components/AuthControls";
 import { AuthProvider } from "@/components/AuthProvider";
+import { CartProvider } from "@/components/CartProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,15 +19,17 @@ export default function RootLayout({
     <html lang="pl">
       <body>
         <AuthProvider>
-          <header className="site-header">
-            <div className="site-shell site-header__content">
-              <Link href="/" className="site-title">
-                Planszówkowo
-              </Link>
-              <AuthControls />
-            </div>
-          </header>
-          <main className="site-shell site-main">{children}</main>
+          <CartProvider>
+            <header className="site-header">
+              <div className="site-shell site-header__content">
+                <Link href="/" className="site-title">
+                  Planszówkowo
+                </Link>
+                <AuthControls />
+              </div>
+            </header>
+            <main className="site-shell site-main">{children}</main>
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

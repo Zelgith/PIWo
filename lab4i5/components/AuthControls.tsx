@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
+import { useCart } from "@/components/CartProvider";
 import { signOutUser } from "@/lib/auth";
 
 export function AuthControls() {
   const { user, loading, hasFirebaseConfig } = useAuth();
+  const { itemCount } = useCart();
   const [error, setError] = useState("");
   const [isSigningOut, setIsSigningOut] = useState(false);
   const userLabel = user?.displayName || user?.email || "Użytkownik";
@@ -38,6 +40,9 @@ export function AuthControls() {
   if (!user) {
     return (
       <div className="header-actions">
+        <Link href="/cart" className="button button--light header-cart">
+          Koszyk ({itemCount})
+        </Link>
         <Link href="/login" className="button button--secondary">
           Zaloguj się
         </Link>
@@ -49,6 +54,9 @@ export function AuthControls() {
     <div className="header-actions">
       <Link href="/games/new" className="button button--primary">
         Dodaj grę
+      </Link>
+      <Link href="/cart" className="button button--light header-cart">
+        Koszyk ({itemCount})
       </Link>
       <span className="header-user" title={userLabel}>
         {userLabel}

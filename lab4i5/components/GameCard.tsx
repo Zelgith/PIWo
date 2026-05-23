@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
+import { useCart } from "@/components/CartProvider";
 import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import { BoardGame } from "@/lib/types";
 
@@ -15,11 +16,14 @@ type GameCardProps = {
 
 export function GameCard({ game, buyingGameId, onBuyNow }: GameCardProps) {
   const { user } = useAuth();
+  const { isInCart, addToCart, removeFromCart } = useCart();
   const [hasImageError, setHasImageError] = useState(false);
   const firstImage = game.images[0];
   const shortDescription = game.description[0] ?? "Brak opisu.";
   const isOwner = user?.uid === game.sellerId;
   const isBuying = buyingGameId === game.id;
+  const canUseCart = !game.isSold && !game.isAuction && !isOwner;
+  const inCart = isInCart(game.id);
 
   return (
     <article className={`game-card${game.isSold ? " game-card--sold" : ""}`}>
@@ -85,6 +89,17 @@ export function GameCard({ game, buyingGameId, onBuyNow }: GameCardProps) {
                 {isBuying ? "Kupowanie..." : "Kup teraz"}
               </button>
             )}
+            {canUseCart ? (
+              <button
+                type="button"
+                className="button button--secondary"
+                onClick={() =>
+                  inCart ? removeFromCart(game.id) : addToCart(game.id)
+                }
+              >
+                {inCart ? "Usuń z koszyka" : "Do koszyka"}
+              </button>
+            ) : null}
           </div>
         </div>
       </div>

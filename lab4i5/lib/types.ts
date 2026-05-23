@@ -80,3 +80,13 @@ export type GameFormValues = {
   imagesText: string;
   descriptionText: string;
 };
+
+export type CartState = {
+  gameIds: string[];
+};
+
+export type CartAction =
+  | { type: "HYDRATE"; payload: string[] }
+  | { type: "ADD_ITEM"; payload: string }
+  | { type: "REMOVE_ITEM"; payload: string }
+  | { type: "CLEAR_CART" };
